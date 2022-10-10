@@ -1,6 +1,16 @@
 // src/index.js
+import _ from 'lodash';
 import { initializeApp } from 'firebase/app';
-import { getAuth,  signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+
+const { LoginFb } = require('./util');
+var email = document.getElementById("email").value;
+var password = document.getElementById("password").value;
+
+document.getElementById("Loggin").onclick = function(event) {
+  loggin();
+}
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -16,16 +26,13 @@ const firebaseApp = initializeApp({
   measurementId: "G-BWDKK1DMRC"
 });
 
-const auth = getAuth(firebaseapp);
+const auth = getAuth(firebaseApp);
+
+function loggin(){
+  LoginFb(email,password);
+
+  }
 
 
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+
+
