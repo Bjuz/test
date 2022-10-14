@@ -7,7 +7,7 @@
   "scripts": {
     "build": "webpack --mode=development",
     "start": "webpack app.js --mode development --watch",
-    "test": "jest  "
+    "test": "jest --detectOpenHandles "
   },
   "keywords": [],
   "author": "",
@@ -20,7 +20,7 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "firebase": "^9.11.0",
+    "firebase": "^9.12.1",
     "lodash": "^4.17.21"
   }
 }

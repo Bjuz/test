@@ -1,7 +1,8 @@
 // src/index.js
 
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword,onAuthStateChanged } from "firebase/auth";
+
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -21,29 +22,42 @@ const firebaseApp = initializeApp({
 const auth = getAuth(firebaseApp);
 var id = "empty";
 
-export  function LoginFb (email,password) {
-    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      id = userCredential;
-    const user = userCredential.user;
-    console.log("Login Ok");
-    
+export async function  loginComplete(email,password){
+  const login = await LoginFb (email,password);
+  return login;
+
+}
+
+
+export  async function LoginFb (email,password) {
+  var user = "";
+  const test = await signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    user = userCredential.user;
+    return "Logueado";
     // ...
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    alert(errorMessage);
+    return errorMessage;
+  });
 
-  }).then((e)=>{
-    if(id == "empty"){
-      return("Fail to loggin");
-    }else{
-      return("Login Ok");
+  return test
+    
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      // ...
+    } else {
+      // User is signed out
+      // ...
     }
   });
-  return("Login Ok");
-
-  };
 
 
 
