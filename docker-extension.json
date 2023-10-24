@@ -1,0 +1,9 @@
+{
+  "publisher": "Microsoft.Azure.Extensions",
+  "type": "CustomScript",
+  "typeHandlerVersion": "2.0",
+  "settings": {
+    "script": "https://URL-DE-TU-SCRIPT/install-docker.sh"
+  },
+  "protectedSettings": {}
+}
